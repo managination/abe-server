@@ -4,13 +4,15 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity(name = "Client")
-@Table(
-        name = "client",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "client_email_unique", columnNames = "email")
-        }
-)
+//@Entity(name = "Client")
+//@Table(
+//        name = "client",
+//        uniqueConstraints = {
+//                @UniqueConstraint(name = "client_email_unique", columnNames = "email")
+//        }
+//)
+@Entity
+@Table
 public class Client {
 
     @Id
@@ -23,17 +25,17 @@ public class Client {
             strategy = SEQUENCE,
             generator = "client_sequence"
     )
-    @Column(
-            name = "id",
-            updatable = false
-    )
+//    @Column(
+//            name = "id",
+//            updatable = false
+//    )
     private Long id;
 
-    @Column(
-            name = "name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "name",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private String name;
 
     @Column(
@@ -42,6 +44,9 @@ public class Client {
             columnDefinition = "TEXT"
     )
     private String email;
+
+    public Client() {
+    }
 
     public Client(String name,
                   String email) {

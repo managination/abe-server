@@ -1,4 +1,4 @@
-package com.example.abe.dcpabe.acceess;
+package com.example.abe.dcpabe.access;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

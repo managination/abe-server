@@ -1,6 +1,6 @@
 package com.example.abe.dcpabe.other;
 
-import com.example.abe.dcpabe.acceess.AccessStructure;
+import com.example.abe.dcpabe.access.AccessStructure;
 
 import java.io.Serializable;
 import java.util.ArrayList;

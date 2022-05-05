@@ -1,4 +1,4 @@
-package com.example.abe.dcpabe.acceess;
+package com.example.abe.dcpabe.access;
 
 public abstract class InternalNode extends TreeNode {
     private static final long serialVersionUID = 1L;

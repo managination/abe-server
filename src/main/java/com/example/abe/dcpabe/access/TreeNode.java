@@ -1,4 +1,4 @@
-package com.example.abe.dcpabe.acceess;
+package com.example.abe.dcpabe.access;
 
 import java.io.Serializable;
 

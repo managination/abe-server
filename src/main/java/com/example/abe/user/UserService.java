@@ -21,4 +21,8 @@ public class UserService {
                         List.of("worker"))
         );
     }
+
+    public void addNewUser(User user) {
+        System.out.println(user);
+    }
 }
