@@ -6,23 +6,61 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonType.class)
+})
+@Entity(name = "AccessStructure")
+@Table(name = "access_structure")
 @JsonSerialize(using = AccessStructure.Serialize.class)
 @JsonDeserialize(using = AccessStructure.Deserialize.class)
 public class AccessStructure implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @SequenceGenerator(
+            name = "access_structure_sequence",
+            sequenceName = "access_structure_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "access_structure_sequence"
+    )
+    private Long id;
+
+    @Type(type = "json")
+    @Column(columnDefinition = "jsonb")
     private Map<Integer, String> rho;
+
+    @Type(type = "json")
+    @Column(columnDefinition = "jsonb")
     private List<List<MatrixElement>> A;
+
+//    @Column
     private TreeNode policyTree;
+
+//    @Column
     private int partsIndex;
 
     private AccessStructure() {
         A = new ArrayList<>();
         rho = new HashMap<>();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public static AccessStructure buildFromPolicy(String policy) {

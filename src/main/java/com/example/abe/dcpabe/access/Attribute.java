@@ -11,13 +11,13 @@ public class Attribute extends TreeNode {
 
     @Id
     @SequenceGenerator(
-            name = "client_sequence",
-            sequenceName = "client_sequence",
+            name = "attribute_sequence",
+            sequenceName = "attribute_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = SEQUENCE,
-            generator = "client_sequence"
+            generator = "attribute_sequence"
     )
     @Column(
             name = "id",
@@ -25,18 +25,18 @@ public class Attribute extends TreeNode {
     )
     private Long id;
 
-    @Column(
-            name = "name",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "name",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private String name;
 
-    @Column(
-            name = "x",
-            nullable = false,
-            columnDefinition = "INT"
-    )
+//    @Column(
+//            name = "x",
+//            nullable = false,
+//            columnDefinition = "INT"
+//    )
     private int x;
 
     public Attribute(String name) {

@@ -4,15 +4,14 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-//@Entity(name = "Client")
+@Entity(name = "Client")
 //@Table(
 //        name = "client",
 //        uniqueConstraints = {
 //                @UniqueConstraint(name = "client_email_unique", columnNames = "email")
 //        }
 //)
-@Entity
-@Table
+@Table(name = "client")
 public class Client {
 
     @Id
@@ -38,11 +37,11 @@ public class Client {
 //    )
     private String name;
 
-    @Column(
-            name = "email",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "email",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private String email;
 
     public Client() {

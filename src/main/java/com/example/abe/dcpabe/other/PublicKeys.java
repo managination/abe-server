@@ -2,12 +2,39 @@ package com.example.abe.dcpabe.other;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.abe.dcpabe.key.PublicKey;
+import com.vladmihalcea.hibernate.type.json.JsonType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonType.class)
+})
+@Entity(name = "PublicKeys")
+@Table(name = "public_keys")
 public class PublicKeys {
+
+    @Id
+    @SequenceGenerator(
+            name = "public_keys_sequence",
+            sequenceName = "public_keys_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "public_keys_sequence"
+    )
+    private Long id;
+
+    @Type(type = "json")
+    @Column(columnDefinition = "jsonb")
     @JsonProperty("publicKeys")
     private Map<String, PublicKey> publicKeys;
 
@@ -17,6 +44,10 @@ public class PublicKeys {
 
     public void subscribeAuthority(Map<String, PublicKey> pks) {
         publicKeys.putAll(pks);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public PublicKey getPK(String attribute) {

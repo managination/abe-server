@@ -3,7 +3,6 @@ package com.example.abe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -23,13 +22,21 @@ public class ClientController {
     }
 
     @PostMapping
-    public void registerNewClient(@RequestBody Client client) {
+    public void registerNewClient(
+            @RequestBody Client client) {
         clientService.addNewClient(client);
     }
 
-    @DeleteMapping(path = "{clientID}")
-    public void deleteClient(@PathVariable("clientID") Long clientId) {
+    @DeleteMapping(path = "{clientId}")
+    public void deleteClient(
+            @PathVariable("clientId") Long clientId) {
         clientService.deleteClient(clientId);
     }
 
+    @PutMapping(path = "{clientId}")
+    public void updateClient(@PathVariable("clientId") Long clientId,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String email) {
+        clientService.updateClient(clientId, name, email);
+    }
 }

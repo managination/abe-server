@@ -30,18 +30,18 @@ public class SecretKey implements Serializable {
     )
     private long id;
 
-    @Column(
-            name = "ai",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "ai",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private byte[] ai;
 
-    @Column(
-            name = "yi",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "yi",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private byte[] yi;
 
     @JsonCreator

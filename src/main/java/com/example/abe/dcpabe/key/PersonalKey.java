@@ -31,18 +31,18 @@ public class PersonalKey implements Serializable {
     )
     private long id;
 
-    @Column(
-            name = "attribute",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "attribute",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private final String attribute;
 
-    @Column(
-            name = "key",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "key",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private final byte[] key;
 
     @JsonCreator

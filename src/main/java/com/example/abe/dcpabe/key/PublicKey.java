@@ -30,18 +30,18 @@ public class PublicKey implements Serializable {
     )
     private long id;
 
-    @Column(
-            name = "eg1g1ai",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "eg1g1ai",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private final byte[] eg1g1ai;
 
-    @Column(
-            name = "g1yi",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+//    @Column(
+//            name = "g1yi",
+//            nullable = false,
+//            columnDefinition = "TEXT"
+//    )
     private final byte[] g1yi;
 
     @JsonCreator

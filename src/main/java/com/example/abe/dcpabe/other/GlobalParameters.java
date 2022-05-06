@@ -6,22 +6,60 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.jpbc.PairingParameters;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
+import javax.persistence.*;
 import java.io.*;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonType.class)
+})
+@Entity(name = "GlobalParameters")
+@Table(name = "global_parameters")
 @JsonSerialize(using = GlobalParameters.Serializer.class)
 @JsonDeserialize(using = GlobalParameters.Deserializer.class)
 public class GlobalParameters implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @SequenceGenerator(
+            name = "global_parameters_sequence",
+            sequenceName = "global_parameters_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "global_parameters_sequence"
+    )
+    private Long id;
+
+    @Type(type = "json")
+    @Column(columnDefinition = "jsonb")
     private PairingParameters pairingParameters;
+
+    @Type(type = "json")
+    @Column(columnDefinition = "jsonb")
     private Element g1;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public PairingParameters getPairingParameters() {
         return pairingParameters;
