@@ -33,6 +33,8 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class GlobalParameters implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static GlobalParameters gp = DCPABE.globalSetup(160);
+
     @Id
     @SequenceGenerator(
             name = "global_parameters_sequence",

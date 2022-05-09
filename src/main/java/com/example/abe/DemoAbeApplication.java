@@ -12,7 +12,6 @@ public class DemoAbeApplication {
 		SpringApplication.run(DemoAbeApplication.class, args);
 	}
 
-// Example of inserting data into DB table client
 	@Bean
 	CommandLineRunner commandLineRunner(ClientRepository clientRepository) {
 		return args -> {
