@@ -28,4 +28,17 @@ public class AuthorityController {
         authorityService.addNewAuthority(body);
     }
 
+    @DeleteMapping(path = "{authorityId}")
+    public void deleteAuthority(
+            @PathVariable("authorityId") Long authorityId) {
+        authorityService.deleteAuthority(authorityId);
+    }
+
+    @PutMapping(path = "{authorityId}")
+    public void updateAuthority(@PathVariable("authorityId") Long authorityId,
+                                @RequestParam(required = false) String name,
+                                @RequestParam(required = false) String[] attributes) {
+        authorityService.updateAuthority(authorityId, name, attributes);
+    }
+
 }

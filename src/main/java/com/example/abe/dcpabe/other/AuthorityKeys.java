@@ -1,8 +1,8 @@
 package com.example.abe.dcpabe.other;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.key.SecretKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -36,8 +36,8 @@ public class AuthorityKeys implements Serializable {
     )
     private Long id;
 
-    @JsonProperty("authorityID")
-    private String authorityID;
+    @JsonProperty("name")
+    private String name;
 
     @Type(type = "json")
     @Column(columnDefinition = "jsonb")
@@ -50,7 +50,7 @@ public class AuthorityKeys implements Serializable {
     private Map<String, SecretKey> secretKeys;
 
     public AuthorityKeys(String authorityID) {
-        this.authorityID = authorityID;
+        this.name = authorityID;
         publicKeys = new HashMap<>();
         secretKeys = new HashMap<>();
     }
@@ -62,8 +62,8 @@ public class AuthorityKeys implements Serializable {
         return id;
     }
 
-    public String getAuthorityID() {
-        return authorityID;
+    public String getAuthorityName() {
+        return name;
     }
 
     public Map<String, PublicKey> getPublicKeys() {
@@ -74,18 +74,26 @@ public class AuthorityKeys implements Serializable {
         return secretKeys;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthorityKeys that = (AuthorityKeys) o;
-        return Objects.equals(getAuthorityID(), that.getAuthorityID()) &&
+        return Objects.equals(getAuthorityName(), that.getAuthorityName()) &&
                 Objects.equals(getPublicKeys(), that.getPublicKeys()) &&
                 Objects.equals(getSecretKeys(), that.getSecretKeys());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAuthorityID(), getPublicKeys(), getSecretKeys());
+        return Objects.hash(getAuthorityName(), getPublicKeys(), getSecretKeys());
     }
 }

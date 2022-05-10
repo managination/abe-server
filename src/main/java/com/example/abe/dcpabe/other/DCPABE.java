@@ -60,7 +60,7 @@ public class DCPABE {
     }
 
     public static AuthorityKeys authorityRecreate(AuthorityKeys authorityKeysOld, GlobalParameters GP, String... attributes) {
-        AuthorityKeys authorityKeys = new AuthorityKeys(authorityKeysOld.getAuthorityID());
+        AuthorityKeys authorityKeys = new AuthorityKeys(authorityKeysOld.getAuthorityName());
         authorityKeys.getPublicKeys().putAll(authorityKeysOld.getPublicKeys());
         authorityKeys.getSecretKeys().putAll(authorityKeysOld.getSecretKeys());
 

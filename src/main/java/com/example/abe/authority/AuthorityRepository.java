@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface AuthorityRepository extends JpaRepository<AuthorityKeys, Long> {
 
-    @Query("SELECT a FROM AuthorityKeys a WHERE a.authorityID = ?1")
+    @Query("SELECT a FROM AuthorityKeys a WHERE a.name = ?1")
     Optional<AuthorityKeys> findAuthorityByName(String name);
 
 }
