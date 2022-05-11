@@ -1,5 +1,6 @@
 package com.example.abe.publicKeys;
 
+import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.PublicKeys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,14 @@ public class PublicKeysService {
         publicKeysRepository.save(publicKeys);
     }
 
+    public PublicKey getPublicKeyByAttribute(String attribute) {
+        List<PublicKeys> pks = publicKeysRepository.findAll();
+        return pks.get(0).getPK(attribute);
+    }
+
+    public void removePublicKey(String attribute) {
+        PublicKeys publicKeys = publicKeysRepository.findAll().get(0);
+        publicKeys.removePK(attribute);
+        publicKeysRepository.save(publicKeys);
+    }
 }

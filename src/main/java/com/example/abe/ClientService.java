@@ -1,5 +1,7 @@
 package com.example.abe;
 
+import com.example.abe.dcpabe.other.PersonalKeys;
+import com.example.abe.personalKeys.PersonalKeysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,13 @@ import java.util.Optional;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final PersonalKeysRepository personalKeysRepository;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository,
+                         PersonalKeysRepository personalKeysRepository) {
         this.clientRepository = clientRepository;
+        this.personalKeysRepository = personalKeysRepository;
     }
 
     public List<Client> getClients() {
@@ -29,6 +34,10 @@ public class ClientService {
             throw new IllegalStateException("email taken");
         }
         clientRepository.save(client);
+
+        //create empty personal keys for client
+        PersonalKeys personalKeys = new PersonalKeys(client.getName());
+        personalKeysRepository.save(personalKeys);
     }
 
     public void deleteClient(Long clientId) {

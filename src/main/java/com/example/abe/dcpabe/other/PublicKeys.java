@@ -54,6 +54,10 @@ public class PublicKeys {
         return publicKeys.get(attribute);
     }
 
+    public void removePK(String attribute) {
+        publicKeys.remove(attribute);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

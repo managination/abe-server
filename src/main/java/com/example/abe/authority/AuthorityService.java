@@ -1,5 +1,6 @@
 package com.example.abe.authority;
 
+import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.publicKeys.PublicKeysService;
@@ -43,12 +44,26 @@ public class AuthorityService {
 
     }
 
-    public void deleteAuthority(Long authorityId) {
-        boolean exists = authorityRepository.existsById(authorityId);
-        if (!exists) {
+    public void deleteAuthority(Long authorityId, String attribute) {
+
+        boolean authorityExists = authorityRepository.existsById(authorityId);
+        if (!authorityExists) {
             throw new IllegalStateException("authority with id " + authorityId + " does not exist");
         }
-        authorityRepository.deleteById(authorityId);
+
+        boolean attributeExists = authorityRepository.findAll().get(0).getPublicKeys().containsKey(attribute);
+        if (!attributeExists) {
+            authorityRepository.deleteById(authorityId);
+        } else {
+            AuthorityKeys authority = authorityRepository.findById(authorityId)
+                    .orElseThrow(() -> new IllegalStateException(
+                            ("authority with id " + authorityId + " does not exist")));
+
+            authority.removePK(attribute);
+            authority.removeSK(attribute);
+            authorityRepository.save(authority);
+            publicKeysService.removePublicKey(attribute); //remove authority PKs from all PKs
+        }
     }
 
     @Transactional
@@ -71,4 +86,12 @@ public class AuthorityService {
         }
     }
 
+    public PersonalKey getPersonalKey(String clientName, Long authorityId, String attribute) {
+        AuthorityKeys authority = authorityRepository.findById(authorityId)
+                .orElseThrow(() -> new IllegalStateException(
+                        ("authority with id " + authorityId + " does not exist")));
+
+        return DCPABE.keyGen(clientName, attribute, authority.getSecretKeys().get(attribute), gp);
+        // personal key is generated, but isn't stored
+    }
 }

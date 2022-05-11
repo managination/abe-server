@@ -82,6 +82,14 @@ public class AuthorityKeys implements Serializable {
         this.name = name;
     }
 
+    public void removePK(String attribute) {
+        publicKeys.remove(attribute);
+    }
+
+    public void removeSK(String attribute) {
+        secretKeys.remove(attribute);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
