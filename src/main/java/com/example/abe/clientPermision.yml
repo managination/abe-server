@@ -1,0 +1,25 @@
+---
+authority1:
+  client1:
+    attributes:
+      - attr1
+      - attr2
+  client2:
+    attributes:
+      - attr1
+  client3:
+    attributes:
+      - attr1
+      - attr3
+authority2:
+  client4:
+    attributes:
+      - attr4
+      - attr5
+  client5:
+    attributes:
+      - attr4
+  client6:
+    attributes:
+      - attr4
+      - attr6

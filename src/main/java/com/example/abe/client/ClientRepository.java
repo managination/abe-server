@@ -1,4 +1,4 @@
-package com.example.abe;
+package com.example.abe.client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

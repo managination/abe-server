@@ -1,5 +1,7 @@
 package com.example.abe;
 
+import com.example.abe.client.Client;
+import com.example.abe.client.ClientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
