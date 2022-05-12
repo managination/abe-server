@@ -1,5 +1,6 @@
 package com.example.abe.authority;
 
+import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.publicKeys.PublicKeysService;
@@ -85,4 +86,12 @@ public class AuthorityService {
         }
     }
 
+    public PersonalKey getPersonalKey(String clientName, Long authorityId, String attribute) {
+        AuthorityKeys authority = authorityRepository.findById(authorityId)
+                .orElseThrow(() -> new IllegalStateException(
+                        ("authority with id " + authorityId + " does not exist")));
+
+        return DCPABE.keyGen(clientName, attribute, authority.getSecretKeys().get(attribute), gp);
+        // personal key is generated, but isn't stored
+    }
 }

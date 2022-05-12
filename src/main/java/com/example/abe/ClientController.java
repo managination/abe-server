@@ -1,4 +1,4 @@
-package com.example.abe.client;
+package com.example.abe;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

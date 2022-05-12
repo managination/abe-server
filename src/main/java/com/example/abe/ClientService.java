@@ -1,4 +1,4 @@
-package com.example.abe.client;
+package com.example.abe;
 
 import com.example.abe.dcpabe.other.PersonalKeys;
 import com.example.abe.personalKeys.PersonalKeysRepository;
