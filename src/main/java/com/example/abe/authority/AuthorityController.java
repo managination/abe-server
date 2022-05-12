@@ -43,11 +43,4 @@ public class AuthorityController {
         authorityService.updateAuthority(authorityId, name, attributes);
     }
 
-    @GetMapping(path = "{clientName}")
-    public PersonalKey getPersonalKey(@PathVariable("clientName") String clientName,
-                                      @RequestParam Long authorityId,
-                                      @RequestParam String attribute) {
-        return authorityService.getPersonalKey(clientName, authorityId, attribute);
-    }
-
 }

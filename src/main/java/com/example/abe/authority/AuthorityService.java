@@ -86,12 +86,4 @@ public class AuthorityService {
         }
     }
 
-    public PersonalKey getPersonalKey(String clientName, Long authorityId, String attribute) {
-        AuthorityKeys authority = authorityRepository.findById(authorityId)
-                .orElseThrow(() -> new IllegalStateException(
-                        ("authority with id " + authorityId + " does not exist")));
-
-        return DCPABE.keyGen(clientName, attribute, authority.getSecretKeys().get(attribute), gp);
-        // personal key is generated, but isn't stored
-    }
 }
