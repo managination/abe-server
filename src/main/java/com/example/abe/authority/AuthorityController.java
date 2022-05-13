@@ -1,6 +1,5 @@
 package com.example.abe.authority;
 
-import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

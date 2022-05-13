@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/v1/publicKeys")
@@ -30,6 +31,11 @@ public class PublicKeysController {
     public PublicKey getPublicKeyByAttribute(
             @PathVariable("attribute") String attribute) {
         return publicKeysService.getPublicKeyByAttribute(attribute);
+    }
+
+    @GetMapping(path = "/all-attributes")
+    public Set<String> getAllAttributes() {
+        return publicKeysService.getAllAttributes();
     }
 
 }

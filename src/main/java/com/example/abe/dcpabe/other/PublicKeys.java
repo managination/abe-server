@@ -1,7 +1,7 @@
 package com.example.abe.dcpabe.other;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.abe.dcpabe.key.PublicKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -52,6 +53,10 @@ public class PublicKeys {
 
     public PublicKey getPK(String attribute) {
         return publicKeys.get(attribute);
+    }
+
+    public Set<String> getAllAttributes() {
+        return publicKeys.keySet();
     }
 
     public void removePK(String attribute) {
