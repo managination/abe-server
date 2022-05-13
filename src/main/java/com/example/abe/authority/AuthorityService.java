@@ -1,6 +1,5 @@
 package com.example.abe.authority;
 
-import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.publicKeys.PublicKeysService;

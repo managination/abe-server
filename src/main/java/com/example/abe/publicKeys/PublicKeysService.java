@@ -6,7 +6,9 @@ import com.example.abe.dcpabe.other.PublicKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PublicKeysService {
@@ -38,4 +40,14 @@ public class PublicKeysService {
         publicKeys.removePK(attribute);
         publicKeysRepository.save(publicKeys);
     }
+
+    public Set<String> getAllAttributes() {
+        List<PublicKeys> pks = publicKeysRepository.findAll();
+        Set<String> str = new HashSet<>();
+        for(PublicKeys pk : pks) {
+            str.addAll(pk.getAllAttributes());
+        }
+        return str;
+    }
+
 }
