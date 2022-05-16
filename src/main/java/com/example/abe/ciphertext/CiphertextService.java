@@ -34,7 +34,11 @@ public class CiphertextService {
 
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
         Message message = DCPABE.generateRandomMessage(gp); //for now message is generated
-        PublicKeys publicKeys = publicKeysService.getPublicKeys().get(0);
+        List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
+        PublicKeys publicKeys = new PublicKeys();
+        for(PublicKeys pubKs : publicKeysList) {
+            publicKeys.unitePublicKeys(pubKs.getPublicKeys());
+        }
         Ciphertext ciphertext = DCPABE.encrypt(message, as, gp, publicKeys);
 
         ciphertextRepository.save(ciphertext);

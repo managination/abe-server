@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static com.example.abe.dcpabe.other.GlobalParameters.gp;
 
@@ -43,6 +40,7 @@ public class AuthorityService {
 
     }
 
+    //deletes authority or just attribute if it is present in parameter
     public void deleteAuthority(Long authorityId, String attribute) {
 
         boolean authorityExists = authorityRepository.existsById(authorityId);
@@ -50,14 +48,15 @@ public class AuthorityService {
             throw new IllegalStateException("authority with id " + authorityId + " does not exist");
         }
 
-        boolean attributeExists = authorityRepository.findAll().get(0).getPublicKeys().containsKey(attribute);
-        if (!attributeExists) {
+        Set<String> allAttributes = publicKeysService.getAllAttributes();
+        if (attribute != null && !allAttributes.contains(attribute)) {
+            throw new IllegalStateException("attribute does not exist");
+        }
+
+        if (attribute == null) {
             authorityRepository.deleteById(authorityId);
         } else {
-            AuthorityKeys authority = authorityRepository.findById(authorityId)
-                    .orElseThrow(() -> new IllegalStateException(
-                            ("authority with id " + authorityId + " does not exist")));
-
+            AuthorityKeys authority = authorityRepository.getById(authorityId);
             authority.removePK(attribute);
             authority.removeSK(attribute);
             authorityRepository.save(authority);
