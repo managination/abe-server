@@ -25,29 +25,52 @@ public class PublicKeysService {
     }
 
     public void addPublicKeys(AuthorityKeys authority) {
-        PublicKeys publicKeys = new PublicKeys();
-        publicKeys.subscribeAuthority(authority.getPublicKeys());
-        publicKeysRepository.save(publicKeys);
+        Long authorityId = authority.getId();
+        boolean publicKeysExist = publicKeysRepository.existsById(authorityId);
+        if (publicKeysExist) {
+            PublicKeys publicKeys = publicKeysRepository.findById(authorityId)
+                    .orElseThrow(() -> new IllegalStateException(
+                            ("public keys with id " + authorityId + " does not exist")));
+
+            publicKeys.subscribeAuthority(authority.getPublicKeys());
+            publicKeysRepository.save(publicKeys);
+        } else {
+            PublicKeys publicKeys = new PublicKeys();
+            publicKeys.subscribeAuthority(authority.getPublicKeys());
+            publicKeysRepository.save(publicKeys);
+        }
+    }
+
+    public PublicKeys getPublicKeysByAttribute(String attribute) {
+        Set<String> allAttributes = getAllAttributes();
+        if (!allAttributes.contains(attribute)) {
+            throw new IllegalStateException("attribute does not exist");
+        }
+
+        List<PublicKeys> publicKeysList = publicKeysRepository.findAll();
+        Long publicKeysId = publicKeysList.stream().filter(publicKeys ->
+                publicKeys.getAllAttributes().contains(attribute)).findFirst().get().getId();
+
+        return publicKeysRepository.getById(publicKeysId);
     }
 
     public PublicKey getPublicKeyByAttribute(String attribute) {
-        List<PublicKeys> pks = publicKeysRepository.findAll();
-        return pks.get(0).getPK(attribute);
+        return getPublicKeysByAttribute(attribute).getPK(attribute);
     }
 
     public void removePublicKey(String attribute) {
-        PublicKeys publicKeys = publicKeysRepository.findAll().get(0);
+        PublicKeys publicKeys = getPublicKeysByAttribute(attribute);
         publicKeys.removePK(attribute);
         publicKeysRepository.save(publicKeys);
     }
 
     public Set<String> getAllAttributes() {
-        List<PublicKeys> pks = publicKeysRepository.findAll();
-        Set<String> str = new HashSet<>();
-        for(PublicKeys pk : pks) {
-            str.addAll(pk.getAllAttributes());
+        List<PublicKeys> publicKeysList = publicKeysRepository.findAll();
+        Set<String> attributes = new HashSet<>();
+        for(PublicKeys publicKeys : publicKeysList) {
+            attributes.addAll(publicKeys.getAllAttributes());
         }
-        return str;
+        return attributes;
     }
 
 }

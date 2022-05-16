@@ -47,12 +47,20 @@ public class PublicKeys {
         publicKeys.putAll(pks);
     }
 
+    public void unitePublicKeys(Map<String, PublicKey> pks) {
+        publicKeys.putAll(pks);
+    }
+
     public Long getId() {
         return id;
     }
 
     public PublicKey getPK(String attribute) {
         return publicKeys.get(attribute);
+    }
+
+    public Map<String, PublicKey> getPublicKeys() {
+        return publicKeys;
     }
 
     public Set<String> getAllAttributes() {
