@@ -55,7 +55,7 @@ public class AuthorityKeys implements Serializable {
         secretKeys = new HashMap<>();
     }
 
-    private AuthorityKeys() {
+    public AuthorityKeys() {
     }
 
     public Long getId() {
