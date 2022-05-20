@@ -1,4 +1,4 @@
-package com.example.abe.personalKeys;
+package com.example.abe.repository;
 
 import com.example.abe.dcpabe.other.PersonalKeys;
 import org.springframework.data.jpa.repository.JpaRepository;

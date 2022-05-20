@@ -1,6 +1,7 @@
-package com.example.abe.personalKeys;
+package com.example.abe.controller;
 
 import com.example.abe.dcpabe.other.PersonalKeys;
+import com.example.abe.service.PersonalKeysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

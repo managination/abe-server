@@ -1,5 +1,7 @@
-package com.example.abe.client;
+package com.example.abe.controller;
 
+import com.example.abe.service.ClientService;
+import com.example.abe.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

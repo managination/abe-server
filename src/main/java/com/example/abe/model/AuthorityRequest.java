@@ -1,4 +1,4 @@
-package com.example.abe.authority;
+package com.example.abe.model;
 
 public class AuthorityRequest {
     private String name;

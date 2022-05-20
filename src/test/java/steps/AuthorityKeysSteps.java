@@ -1,7 +1,7 @@
 package steps;
 
-import com.example.abe.authority.AuthorityRequest;
-import com.example.abe.client.Client;
+import com.example.abe.model.AuthorityRequest;
+import com.example.abe.model.Client;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.dcpabe.other.PersonalKeys;

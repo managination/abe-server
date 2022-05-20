@@ -1,8 +1,9 @@
-package com.example.abe.publicKeys;
+package com.example.abe.service;
 
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.PublicKeys;
+import com.example.abe.repository.PublicKeysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

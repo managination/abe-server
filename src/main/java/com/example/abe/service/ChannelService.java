@@ -1,6 +1,8 @@
-package com.example.abe.channel;
+package com.example.abe.service;
 
-import com.example.abe.ciphertext.CiphertextRepository;
+import com.example.abe.model.Channel;
+import com.example.abe.repository.ChannelRepository;
+import com.example.abe.repository.CiphertextRepository;
 import com.example.abe.dcpabe.other.Ciphertext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +24,21 @@ public class ChannelService {
         this.ciphertextRepository = ciphertextRepository;
     }
 
-    public List<Channel> getChannel() {
+    public List<Channel> getAllChannels() {
         return channelRepository.findAll();
     }
 
     public void createChannel(String topic) {
         Channel channel = new Channel(topic, List.of());
         channelRepository.save(channel);
+    }
+
+    public void deleteChannel(Long channelId) {
+        boolean exists = channelRepository.existsById(channelId);
+        if (!exists) {
+            throw new IllegalStateException("channel with id " + channelId + " does not exist");
+        }
+        channelRepository.deleteById(channelId);
     }
 
     @Transactional
@@ -46,5 +56,14 @@ public class ChannelService {
 
         channel.addCiphertext(ciphertext);
         channelRepository.save(channel);
+    }
+
+    public Channel getChannel(String topic) {
+        Optional<Channel> optionalChannel = channelRepository
+                .findChannelByTopic(topic);
+        if (optionalChannel.isEmpty()) {
+            throw new IllegalStateException("channel does not exist");
+        }
+        return optionalChannel.get();
     }
 }

@@ -1,5 +1,7 @@
-package com.example.abe.authority;
+package com.example.abe.controller;
 
+import com.example.abe.model.AuthorityRequest;
+import com.example.abe.service.AuthorityService;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

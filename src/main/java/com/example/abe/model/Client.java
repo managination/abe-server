@@ -1,4 +1,4 @@
-package com.example.abe.client;
+package com.example.abe.model;
 
 import javax.persistence.*;
 

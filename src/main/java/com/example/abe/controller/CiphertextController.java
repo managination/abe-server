@@ -1,5 +1,6 @@
-package com.example.abe.ciphertext;
+package com.example.abe.controller;
 
+import com.example.abe.service.CiphertextService;
 import com.example.abe.dcpabe.other.Ciphertext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

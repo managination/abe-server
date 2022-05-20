@@ -1,7 +1,8 @@
-package com.example.abe.publicKeys;
+package com.example.abe.controller;
 
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.PublicKeys;
+import com.example.abe.service.PublicKeysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
