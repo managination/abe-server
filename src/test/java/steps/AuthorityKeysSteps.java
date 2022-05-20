@@ -1,6 +1,6 @@
 package steps;
 
-import com.example.abe.model.AuthorityRequest;
+import com.example.abe.model.AuthorityRequestPayload;
 import com.example.abe.model.Client;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AuthorityKeysSteps implements En {
 
-    private AuthorityRequest authorityRequest;
+    private AuthorityRequestPayload authorityRequestPayload;
     private AuthorityKeys authorityKeys;
     private PublicKeys publicKeys;
     private Client clientBob;
@@ -25,14 +25,14 @@ public class AuthorityKeysSteps implements En {
     public AuthorityKeysSteps () {
 
         //Scenario: Create Authority with list of attributes
-        Given("^that client defines request body by \"([^\"]*)\" and list of attributes: \"([^\"]*)\", \"([^\"]*)\"$",
+        Given("^that client defines request payload by \"([^\"]*)\" and list of attributes: \"([^\"]*)\", \"([^\"]*)\"$",
                 (String authorityName, String attribute1, String attribute2) -> {
 
-                    authorityRequest = new AuthorityRequest(authorityName, new String[]{attribute1, attribute2});
+                    authorityRequestPayload = new AuthorityRequestPayload(authorityName, new String[]{attribute1, attribute2});
                 });
-        When("^client creates an authority by an authority request body$", () -> {
+        When("^client creates an authority by an authority request payload$", () -> {
 
-                    authorityKeys = DCPABE.authoritySetup(authorityRequest.getName(), gp, authorityRequest.getAttributes());
+                    authorityKeys = DCPABE.authoritySetup(authorityRequestPayload.getName(), gp, authorityRequestPayload.getAttributes());
         });
         Then("^authority should exists with \"([^\"]*)\" and list of attributes: \"([^\"]*)\", \"([^\"]*)\"",
                 (String authorityName, String attribute1, String attribute2) -> {
@@ -49,8 +49,8 @@ public class AuthorityKeysSteps implements En {
         });
         When("^an authority is created by \"([^\"]*)\" and list of attributes: \"([^\"]*)\", \"([^\"]*)\"$",
                 (String authorityName, String attribute1, String attribute2) -> {
-            authorityRequest = new AuthorityRequest(authorityName, new String[]{attribute1, attribute2});
-            authorityKeys = DCPABE.authoritySetup(authorityRequest.getName(), gp, authorityRequest.getAttributes());
+            authorityRequestPayload = new AuthorityRequestPayload(authorityName, new String[]{attribute1, attribute2});
+            authorityKeys = DCPABE.authoritySetup(authorityRequestPayload.getName(), gp, authorityRequestPayload.getAttributes());
         });
         And("^its public keys subscribes to all public keys$", () -> {
             publicKeys.subscribeAuthority(authorityKeys.getPublicKeys());
@@ -66,8 +66,8 @@ public class AuthorityKeysSteps implements En {
 
                     clientBob = new Client(clientName, "bob@gmail.com");
                     bobsPeKs = new PersonalKeys(clientName);
-                    authorityRequest = new AuthorityRequest(authorityName, new String[]{attribute});
-                    authorityKeys = DCPABE.authoritySetup(authorityRequest.getName(), gp, authorityRequest.getAttributes());
+                    authorityRequestPayload = new AuthorityRequestPayload(authorityName, new String[]{attribute});
+                    authorityKeys = DCPABE.authoritySetup(authorityRequestPayload.getName(), gp, authorityRequestPayload.getAttributes());
                 });
         When("^client \"([^\"]*)\" requests personal key by \"([^\"]*)\" from \"([^\"]*)\"$",
                 (String clientName, String attribute, String authorityName) -> {
@@ -81,7 +81,6 @@ public class AuthorityKeysSteps implements En {
                 });
 
 
-// try world approach with static objects
 
     }
 

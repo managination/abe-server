@@ -62,7 +62,7 @@ public class ChannelService {
         Optional<Channel> optionalChannel = channelRepository
                 .findChannelByTopic(topic);
         if (optionalChannel.isEmpty()) {
-            throw new IllegalStateException("channel does not exist");
+            throw new IllegalStateException("channel with topic " + topic + " does not exist");
         }
         return optionalChannel.get();
     }

@@ -1,6 +1,6 @@
 package com.example.abe.service;
 
-import com.example.abe.model.AuthorityRequest;
+import com.example.abe.model.AuthorityRequestPayload;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.repository.AuthorityRepository;
@@ -29,7 +29,7 @@ public class AuthorityService {
         return authorityRepository.findAll();
     }
 
-    public void addNewAuthority(AuthorityRequest body) {
+    public void addNewAuthority(AuthorityRequestPayload body) {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(body.getName());
         if (optionalAuthority.isPresent()) {
@@ -83,6 +83,15 @@ public class AuthorityService {
             authorityRepository.save(authority);
             publicKeysService.addPublicKeys(authority); //add authority PKs to all PKs
         }
+    }
+
+    public AuthorityKeys AuthorityKeysByName(String authorityName) {
+        Optional<AuthorityKeys> optionalAuthority = authorityRepository
+                .findAuthorityByName(authorityName);
+        if (optionalAuthority.isEmpty()) {
+            throw new IllegalStateException("authority with name " + authorityName + " does not exist");
+        }
+        return optionalAuthority.get();
     }
 
 }
