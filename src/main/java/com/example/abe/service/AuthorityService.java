@@ -1,8 +1,9 @@
-package com.example.abe.authority;
+package com.example.abe.service;
 
+import com.example.abe.model.AuthorityRequestPayload;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
-import com.example.abe.publicKeys.PublicKeysService;
+import com.example.abe.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class AuthorityService {
         return authorityRepository.findAll();
     }
 
-    public void addNewAuthority(AuthorityRequest body) {
+    public void createAuthority(AuthorityRequestPayload body) {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(body.getName());
         if (optionalAuthority.isPresent()) {
@@ -82,6 +83,15 @@ public class AuthorityService {
             authorityRepository.save(authority);
             publicKeysService.addPublicKeys(authority); //add authority PKs to all PKs
         }
+    }
+
+    public AuthorityKeys AuthorityKeysByName(String authorityName) {
+        Optional<AuthorityKeys> optionalAuthority = authorityRepository
+                .findAuthorityByName(authorityName);
+        if (optionalAuthority.isEmpty()) {
+            throw new IllegalStateException("authority with name " + authorityName + " does not exist");
+        }
+        return optionalAuthority.get();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.abe.channel;
+package com.example.abe.model;
 
 import com.example.abe.dcpabe.other.Ciphertext;
 import com.vladmihalcea.hibernate.type.json.JsonType;

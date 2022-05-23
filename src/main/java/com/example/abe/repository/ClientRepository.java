@@ -1,5 +1,6 @@
-package com.example.abe.client;
+package com.example.abe.repository;
 
+import com.example.abe.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

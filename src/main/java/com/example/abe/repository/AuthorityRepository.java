@@ -1,4 +1,4 @@
-package com.example.abe.authority;
+package com.example.abe.repository;
 
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import org.springframework.data.jpa.repository.JpaRepository;

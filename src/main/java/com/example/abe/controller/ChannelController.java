@@ -1,5 +1,7 @@
-package com.example.abe.channel;
+package com.example.abe.controller;
 
+import com.example.abe.service.ChannelService;
+import com.example.abe.model.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,8 @@ public class ChannelController {
     }
 
     @GetMapping
-    public List<Channel> getChannel() {
-        return channelService.getChannel();
+    public List<Channel> getAllChannels() {
+        return channelService.getAllChannels();
     }
 
     @PostMapping
@@ -26,10 +28,20 @@ public class ChannelController {
         channelService.createChannel(topic);
     }
 
+    @DeleteMapping(path = "{channelId}")
+    public void deleteChannel(@PathVariable("channelId") Long channelId) {
+        channelService.deleteChannel(channelId);
+    }
+
     @PutMapping(path = "{topic}")
     public void updateChannel(@PathVariable("topic") String topic,
                               @RequestParam Long ciphertextId) {
         channelService.updateChannel(topic, ciphertextId);
+    }
+
+    @GetMapping(path = "{topic}")
+    public Channel getChannel(@PathVariable("topic") String topic) {
+        return channelService.getChannel(topic);
     }
 
 }

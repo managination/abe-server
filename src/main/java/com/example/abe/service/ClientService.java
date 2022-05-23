@@ -1,7 +1,9 @@
-package com.example.abe.client;
+package com.example.abe.service;
 
+import com.example.abe.repository.ClientRepository;
 import com.example.abe.dcpabe.other.PersonalKeys;
-import com.example.abe.personalKeys.PersonalKeysRepository;
+import com.example.abe.model.Client;
+import com.example.abe.repository.PersonalKeysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

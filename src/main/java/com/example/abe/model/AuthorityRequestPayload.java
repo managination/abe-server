@@ -1,10 +1,10 @@
-package com.example.abe.authority;
+package com.example.abe.model;
 
-public class AuthorityRequest {
+public class AuthorityRequestPayload {
     private String name;
     private String[] attributes;
 
-    public AuthorityRequest(String name, String[] attributes) {
+    public AuthorityRequestPayload(String name, String[] attributes) {
         this.name = name;
         this.attributes = attributes;
     }
