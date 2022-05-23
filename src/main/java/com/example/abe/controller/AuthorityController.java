@@ -26,9 +26,9 @@ public class AuthorityController {
     }
 
     @PostMapping
-    public void registerNewAuthority(
+    public void createAuthority(
             @RequestBody AuthorityRequestPayload body) {
-        authorityService.addNewAuthority(body);
+        authorityService.createAuthority(body);
     }
 
     @DeleteMapping(path = "{authorityId}")

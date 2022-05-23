@@ -27,4 +27,9 @@ public class CiphertextController {
     public void createCiphertext(@RequestParam String policy) {
         cipherTextService.createCiphertext(policy);
     }
+
+    @DeleteMapping(path = "{ciphertextId}")
+    public void deleteCiphertext(@PathVariable("ciphertextId") Long ciphertextId) {
+        cipherTextService.deleteCiphertext(ciphertextId);
+    }
 }

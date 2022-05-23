@@ -44,4 +44,12 @@ public class CiphertextService {
         ciphertextRepository.save(ciphertext);
 
     }
+
+    public void deleteCiphertext(Long ciphertextId) {
+        boolean exists = ciphertextRepository.existsById(ciphertextId);
+        if (!exists) {
+            throw new IllegalStateException("ciphertext with id " + ciphertextId + " does not exist");
+        }
+        ciphertextRepository.deleteById(ciphertextId);
+    }
 }

@@ -29,7 +29,7 @@ public class AuthorityService {
         return authorityRepository.findAll();
     }
 
-    public void addNewAuthority(AuthorityRequestPayload body) {
+    public void createAuthority(AuthorityRequestPayload body) {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(body.getName());
         if (optionalAuthority.isPresent()) {
