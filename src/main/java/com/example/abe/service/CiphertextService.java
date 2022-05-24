@@ -52,4 +52,17 @@ public class CiphertextService {
         }
         ciphertextRepository.deleteById(ciphertextId);
     }
+
+    public void createCiphertextByString(String policy, String text) {
+        AccessStructure as = AccessStructure.buildFromPolicy(policy);
+//        Message message = DCPABE.generateRandomMessage(gp); //for now message is generated
+        Message message = DCPABE.createByString(text, gp);  //true approach with custom text
+        List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
+        PublicKeys publicKeys = new PublicKeys();
+        for(PublicKeys pubKs : publicKeysList) {
+            publicKeys.unitePublicKeys(pubKs.getPublicKeys());
+        }
+        Ciphertext ciphertext = DCPABE.encrypt(message, as, gp, publicKeys);
+        ciphertextRepository.save(ciphertext);
+    }
 }
