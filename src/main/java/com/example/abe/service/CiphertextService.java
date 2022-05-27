@@ -33,7 +33,7 @@ public class CiphertextService {
     public void createCiphertext(String policy) {
 
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
-        Message message = DCPABE.generateRandomMessage(gp); //for now message is generated
+        Message message = DCPABE.generateRandomMessage(gp); // message is generated
         List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
         PublicKeys publicKeys = new PublicKeys();
         for(PublicKeys pubKs : publicKeysList) {
@@ -55,8 +55,7 @@ public class CiphertextService {
 
     public void createCiphertextByString(String policy, String text) {
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
-//        Message message = DCPABE.generateRandomMessage(gp); //for now message is generated
-        Message message = DCPABE.createByString(text, gp);  //true approach with custom text
+        Message message = DCPABE.createByString(text, gp);  // message by custom text
         List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
         PublicKeys publicKeys = new PublicKeys();
         for(PublicKeys pubKs : publicKeysList) {
