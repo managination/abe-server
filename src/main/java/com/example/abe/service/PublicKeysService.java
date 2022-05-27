@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PublicKeysService {
@@ -68,9 +69,10 @@ public class PublicKeysService {
     public Set<String> getAllAttributes() {
         List<PublicKeys> publicKeysList = publicKeysRepository.findAll();
         Set<String> attributes = new HashSet<>();
-        for(PublicKeys publicKeys : publicKeysList) {
-            attributes.addAll(publicKeys.getAllAttributes());
-        }
+        List<PublicKeys> list = publicKeysList
+                .stream()
+                .peek(publicKeys -> attributes.addAll(publicKeys.getAllAttributes()))
+                .collect(Collectors.toList());
         return attributes;
     }
 

@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MatrixService {
@@ -26,9 +27,10 @@ public class MatrixService {
         for (Matrix m : matrices) {
             List<String> text = new ArrayList<>();
             ArrayList<byte[]> matr = new ArrayList<>(m.getMatr());
-            for (byte[] t : matr ) {
-                text.add(new String(t));
-            }
+            List<byte[]> list = matr
+                    .stream()
+                    .peek(arr -> text.add(new String(arr)))
+                    .collect(Collectors.toList());
             textMatrix.add(new ArrayList<>(text));
         }
         return textMatrix;
