@@ -5,11 +5,20 @@ import com.example.abe.model.Client;
 import com.example.abe.repository.ClientRepository;
 import com.example.abe.repository.PersonalKeysRepository;
 import com.example.abe.service.ClientService;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,10 +34,37 @@ public class BonqTroveStepDefs {
     }
 
     @Given("The Trove Factory contract has been deployed")
-    public void theTroveFactoryContractHasBeenDeployed() {
-        Client bob = new Client("Bob", "bob@gmail.com");
-        System.out.println("Name " + bob.getName());
-        assertThat(bob.getName(), is("Bob"));
+    public void theTroveFactoryContractHasBeenDeployed() throws IOException {
+//        Client bob = new Client("Bob", "bob@gmail.com");
+//        System.out.println("Name " + bob.getName());
+//        assertThat(bob.getName(), is("Bob"));
+
+
+//        URL url = new URL("http://localhost:8080/api/v1/client");
+//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//        conn.setRequestMethod("GET");
+//        conn.setRequestProperty("Accept", "application/json");
+//
+//        if (conn.getResponseCode() != 200) {
+//            throw new RuntimeException("Failed : HTTP error code : "
+//                    + conn.getResponseCode());
+//        }
+//
+//        BufferedReader br = new BufferedReader(new InputStreamReader(
+//                (conn.getInputStream())));
+//
+//        String output;
+//        System.out.println("Output from Server .... \n");
+//        while ((output = br.readLine()) != null) {
+//            System.out.println(output);
+//        }
+
+        ObjectMapper mapper = new ObjectMapper();
+        Client[] obj = mapper.readValue(new URL("http://localhost:8080/api/v1/client"), Client[].class);
+
+        System.out.println("Our list of clients" + Arrays.toString(obj));
+
+//        conn.disconnect();
     }
 
     @And("The user has at least {int} EWT")
