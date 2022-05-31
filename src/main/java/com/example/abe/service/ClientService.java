@@ -33,7 +33,7 @@ public class ClientService {
         Optional<Client> optionalClient = clientRepository
                 .findClientByEmail(client.getEmail());
         if (optionalClient.isPresent()) {
-            throw new IllegalStateException("email taken");
+            throw new IllegalStateException("email " + client.getEmail() + " is taken");
         }
         clientRepository.save(client);
 
