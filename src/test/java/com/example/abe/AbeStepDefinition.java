@@ -2,12 +2,16 @@ package com.example.abe;
 
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.model.AuthorityRequestPayload;
+import com.example.abe.model.Channel;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -20,21 +24,41 @@ public class AbeStepDefinition {
     @Autowired
     private final RestTemplate restTemplate;
 
+    private String accessStructure;
+
     @Given("{string} has created {string} and {string}")
     public void hasCreatedAnd(String authority, String attr1, String attr2) {
+
         AuthorityRequestPayload requestPayload = new AuthorityRequestPayload(authority, new String[]{attr1, attr2});
         restTemplate.postForLocation("http://localhost:8080/api/v1/authority", requestPayload);
-
-        assertThat(restTemplate.getForObject("http://localhost:8080/api/v1/authority", AuthorityKeys[].class))
-                .isNotEmpty();
+        AuthorityKeys[] authorityKeysArray = restTemplate.getForObject(
+                "http://localhost:8080/api/v1/authority",
+                AuthorityKeys[].class
+        );
+        assert authorityKeysArray != null;
+        assertThat(Arrays.stream(authorityKeysArray)
+                .map(aks -> aks.getAuthorityName().equals(authority))
+                .collect(Collectors.toList())
+                .contains(true)).isTrue();
     }
 
     @And("a topic {string} exists")
-    public void aTopicExists(String arg0) {
+    public void aTopicExists(String topic) {
+        restTemplate.postForLocation("http://localhost:8080/api/v1/channel/?topic=" + topic, null);
+        Channel[] channels = restTemplate.getForObject(
+                "http://localhost:8080/api/v1/channel", Channel[].class
+        );
+        assert channels != null;
+        assertThat(Arrays.stream(channels)
+                .map(channel -> channel.getTopic().equals(topic))
+                .collect(Collectors.toList())
+                .contains(true)).isTrue();
+
     }
 
     @And("{string} is a client that creates an access structure of {string}")
-    public void isAClientThatCreatesAnAccessStructureOf(String arg0, String arg1) {
+    public void isAClientThatCreatesAnAccessStructureOf(String alice, String acSt) {
+        accessStructure = acSt;
     }
 
     @When("{string} encrypts the message {string} with the access structure")
