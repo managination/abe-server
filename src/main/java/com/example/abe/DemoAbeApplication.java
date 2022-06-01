@@ -1,7 +1,7 @@
 package com.example.abe;
 
 import com.example.abe.model.Client;
-import com.example.abe.repository.ClientRepository;
+import com.example.abe.service.ClientService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +15,10 @@ public class DemoAbeApplication {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunner(ClientRepository clientRepository) {
+	CommandLineRunner commandLineRunner(ClientService clientService) {
 		return args -> {
 			Client maria = new Client("Maria", "maria5@gmail.com");
-			clientRepository.save(maria);
+			clientService.addNewClient(maria);
 		};
 	}
 

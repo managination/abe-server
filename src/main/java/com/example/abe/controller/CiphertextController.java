@@ -23,9 +23,15 @@ public class CiphertextController {
         return cipherTextService.getCiphertext();
     }
 
+//    @PostMapping
+//    public void createCiphertext(@RequestParam String policy) {
+//        cipherTextService.createCiphertext(policy);
+//    }
+
     @PostMapping
-    public void createCiphertext(@RequestParam String policy) {
-        cipherTextService.createCiphertext(policy);
+    public void createCiphertext(@RequestParam String policy,
+                                 @RequestBody String text) {
+        cipherTextService.createCiphertextByString(policy, text);
     }
 
     @DeleteMapping(path = "{ciphertextId}")

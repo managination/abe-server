@@ -1,14 +1,14 @@
 package com.example.abe.dcpabe.other;
 
-import it.unisa.dia.gas.jpbc.Element;
-import it.unisa.dia.gas.jpbc.Pairing;
-import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
-import it.unisa.dia.gas.plaf.jpbc.pairing.a1.TypeA1CurveGenerator;
 import com.example.abe.dcpabe.access.AccessStructure;
 import com.example.abe.dcpabe.access.AccessStructure.MatrixElement;
 import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.key.SecretKey;
+import it.unisa.dia.gas.jpbc.Element;
+import it.unisa.dia.gas.jpbc.Pairing;
+import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import it.unisa.dia.gas.plaf.jpbc.pairing.a1.TypeA1CurveGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,6 +214,14 @@ public class DCPABE {
 
         Element M = pairing.getGT().newRandomElement().getImmutable();
 
+        return new Message(M.toBytes());
+    }
+
+    public static Message createByString(String text, GlobalParameters GP) {
+        Pairing pairing = PairingFactory.getPairing(GP.getPairingParameters());
+        Element M = pairing.getGT().newZeroElement();
+        M.setFromBytes(text.getBytes());
+        M = M.getImmutable();
         return new Message(M.toBytes());
     }
 }
