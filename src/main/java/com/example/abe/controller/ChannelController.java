@@ -1,7 +1,7 @@
 package com.example.abe.controller;
 
-import com.example.abe.service.ChannelService;
 import com.example.abe.model.Channel;
+import com.example.abe.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +42,12 @@ public class ChannelController {
     @GetMapping(path = "{topic}")
     public Channel getChannel(@PathVariable("topic") String topic) {
         return channelService.getChannel(topic);
+    }
+
+    @GetMapping(path = "/decrypt")
+    public List<String> decryptChannel(@RequestParam String topic,
+                                       @RequestParam Long personalKeysId) {
+        return channelService.decryptChannel(topic, personalKeysId);
     }
 
 }
