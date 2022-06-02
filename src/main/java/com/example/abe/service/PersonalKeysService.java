@@ -45,4 +45,10 @@ public class PersonalKeysService {
             return personalKeys;
         }
     }
+
+    public PersonalKeys getPersonalKeysById(Long personalKeysId) {
+        return personalKeysRepository.findById(personalKeysId)
+                .orElseThrow(() -> new IllegalStateException(
+                        ("personalKeys with id " + personalKeysId + " does not exist")));
+    }
 }

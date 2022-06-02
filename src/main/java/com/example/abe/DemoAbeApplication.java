@@ -17,8 +17,8 @@ public class DemoAbeApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(ClientService clientService) {
 		return args -> {
-			Client maria = new Client("Maria", "maria5@gmail.com");
-			clientService.addNewClient(maria);
+//			Client maria = new Client("Maria", "maria5@gmail.com");
+//			clientService.addNewClient(maria);
 		};
 	}
 

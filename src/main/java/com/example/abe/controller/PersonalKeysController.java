@@ -30,4 +30,9 @@ public class PersonalKeysController {
         return personalKeysService.addPersonalKey(clientName, authorityId, attribute);
     }
 
+    @GetMapping(path = "{personalKeysId}")
+    public PersonalKeys getPersonalKeysById(@PathVariable Long personalKeysId) {
+        return personalKeysService.getPersonalKeysById(personalKeysId);
+    }
+
 }
