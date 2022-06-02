@@ -1,7 +1,6 @@
 package com.example.abe.controller;
 
-import com.example.abe.model.AuthorityRequestPayload;
-import com.example.abe.model.Channel;
+import com.example.abe.DTO.AuthorityDTO;
 import com.example.abe.service.AuthorityService;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class AuthorityController {
 
     @PostMapping
     public void createAuthority(
-            @RequestBody AuthorityRequestPayload body) {
-        authorityService.createAuthority(body);
+            @RequestBody AuthorityDTO authority) {
+        authorityService.createAuthority(authority);
     }
 
     @DeleteMapping(path = "{authorityId}")

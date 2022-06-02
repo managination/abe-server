@@ -28,7 +28,7 @@ public class PublicKeysController {
         return publicKeysService.getPublicKeys();
     }
 
-    @GetMapping(path = "{attribute}")
+    @GetMapping(path = "/by-attribute/{attribute}")
     public PublicKey getPublicKeyByAttribute(
             @PathVariable("attribute") String attribute) {
         return publicKeysService.getPublicKeyByAttribute(attribute);

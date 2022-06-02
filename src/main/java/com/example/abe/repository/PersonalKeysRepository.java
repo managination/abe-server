@@ -11,4 +11,8 @@ public interface PersonalKeysRepository extends JpaRepository<PersonalKeys, Long
     @Query("SELECT p FROM PersonalKeys p WHERE p.userID = ?1")
     Optional<PersonalKeys> findPersonalKeysByName(String userID);
 
+    @Query("SELECT p FROM PersonalKeys p WHERE p.id= ?1")
+    Optional<PersonalKeys> findPersonalKeysById(Long id);
+
+
 }

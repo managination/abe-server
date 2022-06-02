@@ -1,10 +1,11 @@
-package com.example.abe.model;
+package com.example.abe.DTO;
 
-public class AuthorityRequestPayload {
+public class AuthorityDTO {
     private String name;
     private String[] attributes;
 
-    public AuthorityRequestPayload(String name, String[] attributes) {
+    public AuthorityDTO(String name,
+                        String[] attributes) {
         this.name = name;
         this.attributes = attributes;
     }
