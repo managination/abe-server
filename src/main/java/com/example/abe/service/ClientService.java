@@ -31,8 +31,7 @@ public class ClientService {
 
     public void addNewClient(Client client) {
         String clientEmail = client.getEmail();
-        Optional<Client> optionalClient = clientRepository
-                .findClientByEmail(clientEmail);
+        Optional<Client> optionalClient = clientRepository.findClientByEmail(clientEmail);
         if (optionalClient.isPresent()) {
             throw new IllegalStateException("email " + clientEmail + " is taken");
         }

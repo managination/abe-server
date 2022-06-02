@@ -1,9 +1,10 @@
 package com.example.abe;
 
+import com.example.abe.DTO.AuthorityDTO;
+import com.example.abe.DTO.PersonalKeysRequestDTO;
 import com.example.abe.dcpabe.access.AccessStructure;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.*;
-import com.example.abe.DTO.AuthorityDTO;
 import com.example.abe.model.Channel;
 import com.example.abe.model.Client;
 import io.cucumber.java.en.And;
@@ -13,12 +14,13 @@ import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.example.abe.dcpabe.other.GlobalParameters.gp;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.extractProperty;
 
 public class AbeStepDefinition {
 
@@ -100,9 +102,10 @@ public class AbeStepDefinition {
 
         Client client = new Client(clientName, "bob@mail.com");
         restTemplate.postForLocation("http://localhost:8080/api/v1/client", client);
+        PersonalKeysRequestDTO personalKeysRequestDTO = new PersonalKeysRequestDTO(1L, 1L, attr1);
         restTemplate.put(
-                "http://localhost:8080/api/v1/personalKeys/Bob?authorityId=1&attribute=Attribute1",
-                null
+                "http://localhost:8080/api/v1/personalKeys/request",
+                personalKeysRequestDTO
                 );
     }
 
@@ -113,11 +116,11 @@ public class AbeStepDefinition {
 
         PublicKeys publicKeys = new PublicKeys();
         PublicKey publicKey1 = restTemplate.getForObject(
-                "http://localhost:8080/api/v1/publicKeys/Attribute1",
+                "http://localhost:8080/api/v1/publicKeys/by-attribute/Attribute1",
                 PublicKey.class
         );
         PublicKey publicKey2 = restTemplate.getForObject(
-                "http://localhost:8080/api/v1/publicKeys/Attribute2",
+                "http://localhost:8080/api/v1/publicKeys/by-attribute/Attribute2",
                 PublicKey.class
         );
         Map<String, PublicKey> pksMap = new HashMap<>();
@@ -139,11 +142,23 @@ public class AbeStepDefinition {
                 "http://localhost:8080/api/v1/personalKeys/1",
                 PersonalKeys.class
         );
-        assert personalKeys != null;
+        assertThat(personalKeys != null).isTrue();
+        assertThat(ciphertext != null).isTrue();
 //        Message dMessage = DCPABE.decrypt(ciphertext, personalKeys, gp);
 //        String dText = new String(dMessage.getM());
 //        System.out.println("text " + text);
 //        System.out.println("dText " + dText);
 //        assertThat(true).isTrue();
+    }
+
+    @Then("{string} is not able to decrypt the message and read {string}")
+    public void isNotAbleToDecryptTheMessageAndRead(String arg0, String arg1) {
+
+        PersonalKeys personalKeys = restTemplate.getForObject(
+                "http://localhost:8080/api/v1/personalKeys/1",
+                PersonalKeys.class
+        );
+        assertThat(personalKeys != null).isTrue();
+        assertThat(ciphertext != null).isTrue();
     }
 }

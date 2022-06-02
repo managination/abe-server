@@ -13,3 +13,9 @@ Feature: Share encrypted messages
     And "Bob" is a client which has access to the private key of "Attribute1"
     When "Bob" receives the ciphertext of "Hello World" encrypted with the access structure "Attribute1 OR Attribute2"
     Then "Bob" is able to decrypt the message and read "Hello World"
+
+  Scenario: Do not decrypt Ciphertext
+    Given "AuthorityA" has created "Attribute1" and "Attribute2"
+    And "Bob" is a client which has access to the private key of "Attribute1"
+    When "Bob" receives the ciphertext of "Hello World" encrypted with the access structure "Attribute1 AND Attribute2"
+    Then "Bob" is not able to decrypt the message and read "Hello World"
