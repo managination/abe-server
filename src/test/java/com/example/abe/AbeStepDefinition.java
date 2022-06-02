@@ -3,7 +3,7 @@ package com.example.abe;
 import com.example.abe.dcpabe.access.AccessStructure;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.*;
-import com.example.abe.model.AuthorityRequestPayload;
+import com.example.abe.DTO.AuthorityDTO;
 import com.example.abe.model.Channel;
 import com.example.abe.model.Client;
 import io.cucumber.java.en.And;
@@ -11,9 +11,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -39,7 +36,7 @@ public class AbeStepDefinition {
     @Given("{string} has created {string} and {string}")
     public void hasCreatedAnd(String authority, String attr1, String attr2) {
 
-        AuthorityRequestPayload requestPayload = new AuthorityRequestPayload(authority, new String[]{attr1, attr2});
+        AuthorityDTO requestPayload = new AuthorityDTO(authority, new String[]{attr1, attr2});
         restTemplate.postForLocation("http://localhost:8080/api/v1/authority", requestPayload);
         AuthorityKeys[] authorityKeysArray = restTemplate.getForObject(
                 "http://localhost:8080/api/v1/authority",

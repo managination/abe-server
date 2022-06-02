@@ -1,6 +1,6 @@
 package com.example.abe.service;
 
-import com.example.abe.model.AuthorityRequestPayload;
+import com.example.abe.DTO.AuthorityDTO;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
 import com.example.abe.repository.AuthorityRepository;
@@ -29,7 +29,7 @@ public class AuthorityService {
         return authorityRepository.findAll();
     }
 
-    public void createAuthority(AuthorityRequestPayload body) {
+    public void createAuthority(AuthorityDTO body) {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(body.getName());
         if (optionalAuthority.isPresent()) {
