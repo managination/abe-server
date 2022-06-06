@@ -38,7 +38,9 @@ public class ClientService {
         clientRepository.save(client);
 
         //create empty personal keys for client
-        PersonalKeys personalKeys = new PersonalKeys(client.getName());
+        Client newClient = clientRepository.findClientByEmail(clientEmail)
+                .orElseThrow(() -> new IllegalStateException("client with email " + clientEmail + " was not saved"));
+        PersonalKeys personalKeys = new PersonalKeys(newClient.getId() + "_" + newClient.getName());
         personalKeysRepository.save(personalKeys);
     }
 
