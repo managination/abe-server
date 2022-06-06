@@ -35,9 +35,14 @@ public class AuthorityService {
         if (optionalAuthority.isPresent()) {
             throw new IllegalStateException("authority already exists");
         }
-        AuthorityKeys authority = DCPABE.authoritySetup(body.getName(), gp, body.getAttributes());
+        AuthorityKeys authority = DCPABE.authoritySetup(body.getName(), gp);
         authorityRepository.save(authority);
-        publicKeysService.addPublicKeys(authority); //add authority PKs to all PKs
+        Long authorityId = authorityRepository.findAuthorityByName(body.getName())
+                .orElseThrow(() -> new IllegalStateException("authority was not saved")).getId();
+        String[] attributesWithId = Arrays.stream(body.getAttributes())
+                        .map(attribute -> authorityId.toString() + "_" + attribute)
+                .toArray(String[]::new);
+        updateAuthority(authorityId, body.getName(), attributesWithId);
 
     }
 
