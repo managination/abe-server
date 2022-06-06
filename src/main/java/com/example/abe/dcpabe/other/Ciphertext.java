@@ -71,6 +71,10 @@ public class Ciphertext implements Serializable {
         return c1.get(x);
     }
 
+    public List<byte[]> getC1() {
+        return c1;
+    }
+
     public void setC1(byte[] c1x) {
         c1.add(c1x);
     }
@@ -79,12 +83,20 @@ public class Ciphertext implements Serializable {
         return c2.get(x);
     }
 
+    public List<byte[]> getC2() {
+        return c2;
+    }
+
     public void setC2(byte[] c2x) {
         c2.add(c2x);
     }
 
     public byte[] getC3(int x) {
         return c3.get(x);
+    }
+
+    public List<byte[]> getC3() {
+        return c3;
     }
 
     public void setC3(byte[] c3x) {

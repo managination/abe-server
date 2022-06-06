@@ -1,13 +1,11 @@
 package com.example.abe.model;
 
-import com.example.abe.dcpabe.other.Ciphertext;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
-
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -35,13 +33,13 @@ public class Channel {
 
     @Type(type = "json")
     @Column(columnDefinition = "jsonb")
-    private List<Ciphertext> body;
+    private List<Long> body;
 
     public Channel() {
     }
 
     public Channel(String topic,
-                   List<Ciphertext> body) {
+                   List<Long> body) {
         this.topic = topic;
         this.body = body;
     }
@@ -54,7 +52,7 @@ public class Channel {
         return topic;
     }
 
-    public List<Ciphertext> getBody() {
+    public List<Long> getBody() {
         return body;
     }
 
@@ -66,12 +64,12 @@ public class Channel {
         this.topic = topic;
     }
 
-    public void setBody(List<Ciphertext> body) {
+    public void setBody(List<Long> body) {
         this.body = body;
     }
 
-    public void addCiphertext(Ciphertext ciphertext) {
-        this.body.add(ciphertext);
+    public void addCiphertext(Long ciphertextId) {
+        this.body.add(ciphertextId);
     }
 
 }

@@ -1,20 +1,19 @@
 package com.example.abe.service;
 
+import com.example.abe.dcpabe.other.Ciphertext;
 import com.example.abe.dcpabe.other.DCPABE;
-import com.example.abe.dcpabe.other.Message;
 import com.example.abe.dcpabe.other.PersonalKeys;
 import com.example.abe.model.Channel;
 import com.example.abe.repository.ChannelRepository;
 import com.example.abe.repository.CiphertextRepository;
-import com.example.abe.dcpabe.other.Ciphertext;
 import com.example.abe.repository.PersonalKeysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.example.abe.dcpabe.other.GlobalParameters.gp;
 
@@ -58,13 +57,13 @@ public class ChannelService {
         if (optionalChannel.isEmpty()) {
             throw new IllegalStateException("channel does not exist");
         }
+        boolean ciphertextExists = ciphertextRepository.existsById(ciphertextId);
+        if (!ciphertextExists) {
+            throw new IllegalStateException("ciphertext with id " + ciphertextId + " does not exist");
+        }
+
         Channel channel = optionalChannel.get();
-
-        Ciphertext ciphertext = ciphertextRepository.findById(ciphertextId)
-                .orElseThrow(() -> new IllegalStateException(
-                        ("ciphertext with id " + ciphertextId + " does not exist")));
-
-        channel.addCiphertext(ciphertext);
+        channel.addCiphertext(ciphertextId);
         channelRepository.save(channel);
     }
 
@@ -77,7 +76,6 @@ public class ChannelService {
         return optionalChannel.get();
     }
 
-    //delete later, should not be on service part, just local
     public List<String> decryptChannel(String topic, Long personalKeysId) {
         Optional<Channel> optionalChannel = channelRepository
                 .findChannelByTopic(topic);
@@ -88,14 +86,15 @@ public class ChannelService {
         if (personalKeysOpt.isEmpty()) {
             throw new IllegalStateException("personalKeys with id " + personalKeysId + " does not exist");
         }
-        Ciphertext ciphertext = ciphertextRepository.findById(1L)
-                .orElseThrow(() -> new IllegalStateException(
-                        ("ciphertext with id " + 1L + " does not exist")));
 
         PersonalKeys personalKeys = personalKeysOpt.get();
-        Message message = DCPABE.decrypt(ciphertext, personalKeys, gp);
-        List<String> decrypted = new ArrayList<>();
-        decrypted.add(new String(message.getM()));
-        return decrypted;
+        List<Long> ciphertextIdList = optionalChannel.get().getBody();
+        List<Ciphertext> ciphertexts = ciphertextIdList.stream()
+                .map(ciphertextRepository::getById)
+                .collect(Collectors.toList());
+        return ciphertexts.stream()
+                .map(ciphertext -> DCPABE.decrypt(ciphertext, personalKeys, gp))
+                .map(message -> new String(message.getM()).replace("\0", ""))
+                .collect(Collectors.toList());
     }
 }
