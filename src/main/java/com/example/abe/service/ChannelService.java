@@ -93,7 +93,13 @@ public class ChannelService {
                 .map(ciphertextRepository::getById)
                 .collect(Collectors.toList());
         return ciphertexts.stream()
-                .map(ciphertext -> DCPABE.decrypt(ciphertext, personalKeys, gp))
+                .map(ciphertext -> {
+                    List<Integer> toUse = ciphertext.getAccessStructure().getIndexesList(personalKeys.getAttributes());
+                    if (null == toUse || toUse.isEmpty())
+                        return DCPABE.createByString("NOT DECRYPTED", gp);
+                    else
+                        return DCPABE.decrypt(ciphertext, personalKeys, gp);
+                })
                 .map(message -> new String(message.getM()).replace("\0", ""))
                 .collect(Collectors.toList());
     }
