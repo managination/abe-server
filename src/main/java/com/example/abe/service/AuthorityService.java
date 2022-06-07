@@ -86,9 +86,7 @@ public class AuthorityService {
                 .map(attribute -> authorityId + "_" + attribute)
                 .toArray(String[]::new);
         boolean attributeRepeated = Arrays.stream(attributesWithId)
-                .map(attribute -> {
-                    return authority.getPublicKeys().containsKey(attribute);
-                        }
+                .map(attribute -> authority.getPublicKeys().containsKey(attribute)
                 ).collect(Collectors.toList()).contains(true);
         if (attributeRepeated) {
             throw new IllegalStateException("one of attribute already exists");

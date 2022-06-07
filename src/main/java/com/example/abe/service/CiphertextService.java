@@ -53,7 +53,7 @@ public class CiphertextService {
         ciphertextRepository.deleteById(ciphertextId);
     }
 
-    public void createCiphertextByString(String policy, String text) {
+    public Long createCiphertextByString(String policy, String text) {
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
         Message message = DCPABE.createByString(text, gp);  // message by custom text
         List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
@@ -64,5 +64,6 @@ public class CiphertextService {
                 .collect(Collectors.toList());
         Ciphertext ciphertext = DCPABE.encrypt(message, as, gp, publicKeys);
         ciphertextRepository.save(ciphertext);
+        return ciphertext.getId();
     }
 }
