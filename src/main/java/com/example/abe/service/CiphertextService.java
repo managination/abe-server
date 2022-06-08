@@ -66,4 +66,10 @@ public class CiphertextService {
         ciphertextRepository.save(ciphertext);
         return ciphertext.getId();
     }
+
+    public Ciphertext getCiphertextById(Long ciphertextId) {
+        return ciphertextRepository.findById(ciphertextId)
+                .orElseThrow(() -> new IllegalStateException(
+                        ("ciphertext with id " + ciphertextId + " does not exist")));
+    }
 }
