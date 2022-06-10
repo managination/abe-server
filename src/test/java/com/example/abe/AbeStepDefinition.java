@@ -5,6 +5,7 @@ import com.example.abe.DTO.PersonalKeysRequestDTO;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.model.Channel;
 import com.example.abe.model.Client;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -139,6 +140,11 @@ public class AbeStepDefinition {
 
         assertThat(decryptedList.contains(text)).isFalse();
         System.out.println("Client " + clientName + " can not read the message");
+    }
+
+    @After
+    public void cleanAllData() {
+        restTemplate.delete("http://localhost:8080/api/v1/general/cleanAllData");
     }
 
     private Long getClientIdByEmail(String clientEmail) {
