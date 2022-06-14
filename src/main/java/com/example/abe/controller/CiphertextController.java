@@ -33,4 +33,5 @@ public class CiphertextController {
     public void deleteCiphertext(@PathVariable("ciphertextId") Long ciphertextId) {
         cipherTextService.deleteCiphertext(ciphertextId);
     }
+
 }

@@ -1,7 +1,7 @@
 package com.example.abe;
 
 import com.example.abe.DTO.AuthorityDTO;
-import com.example.abe.DTO.PersonalKeysRequestDTO;
+import com.example.abe.DTO.PersonalKeysDTO;
 import com.example.abe.dcpabe.access.AccessStructure;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.other.*;
@@ -149,10 +149,10 @@ public class AbeStepDefinition {
         assert authorityKeysOptional.isPresent();
         Long authorityKeysId = authorityKeysOptional.get().getId();
 
-        PersonalKeysRequestDTO personalKeysRequestDTO = new PersonalKeysRequestDTO(clientId, authorityKeysId, attr1);
+        PersonalKeysDTO personalKeysDTO = new PersonalKeysDTO(clientId, authorityKeysId, attr1);
         restTemplate.put(
                 "http://localhost:8080/api/v1/personalKeys/request",
-                personalKeysRequestDTO
+                personalKeysDTO
                 );
     }
 

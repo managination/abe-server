@@ -5,12 +5,6 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Client")
-//@Table(
-//        name = "client",
-//        uniqueConstraints = {
-//                @UniqueConstraint(name = "client_email_unique", columnNames = "email")
-//        }
-//)
 @Table(name = "client")
 public class Client {
 
@@ -24,24 +18,10 @@ public class Client {
             strategy = SEQUENCE,
             generator = "client_sequence"
     )
-//    @Column(
-//            name = "id",
-//            updatable = false
-//    )
     private Long id;
 
-//    @Column(
-//            name = "name",
-//            nullable = false,
-//            columnDefinition = "TEXT"
-//    )
     private String name;
 
-//    @Column(
-//            name = "email",
-//            nullable = false,
-//            columnDefinition = "TEXT"
-//    )
     private String email;
 
     public Client() {
@@ -77,12 +57,4 @@ public class Client {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

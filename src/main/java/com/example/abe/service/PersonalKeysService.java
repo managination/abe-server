@@ -1,6 +1,6 @@
 package com.example.abe.service;
 
-import com.example.abe.DTO.PersonalKeysRequestDTO;
+import com.example.abe.DTO.PersonalKeysDTO;
 import com.example.abe.model.Client;
 import com.example.abe.repository.AuthorityRepository;
 import com.example.abe.dcpabe.other.AuthorityKeys;
@@ -35,7 +35,7 @@ public class PersonalKeysService {
         return personalKeysRepository.findAll();
     }
 
-    public PersonalKeys addPersonalKey(PersonalKeysRequestDTO body) {
+    public PersonalKeys addPersonalKey(PersonalKeysDTO body) {
 
         Long clientId = body.getClientId();
         Long authorityId = body.getAuthorityId();
@@ -69,4 +69,5 @@ public class PersonalKeysService {
                 .orElseThrow(() -> new IllegalStateException(
                         ("personalKeys with id " + personalKeysId + " does not exist")));
     }
+
 }

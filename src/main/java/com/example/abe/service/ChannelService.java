@@ -103,4 +103,5 @@ public class ChannelService {
                 .map(message -> new String(message.getM()).replace("\0", ""))
                 .collect(Collectors.toList());
     }
+
 }

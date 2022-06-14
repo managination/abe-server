@@ -50,8 +50,9 @@ public class PublicKeysService {
         }
 
         List<PublicKeys> publicKeysList = publicKeysRepository.findAll();
-        Long publicKeysId = publicKeysList.stream().filter(publicKeys ->
-                publicKeys.getAllAttributes().contains(attribute)).findFirst().get().getId();
+        Long publicKeysId = publicKeysList.stream()
+                .filter(publicKeys -> publicKeys.getAllAttributes().contains(attribute))
+                .findFirst().get().getId();
 
         return publicKeysRepository.getById(publicKeysId);
     }

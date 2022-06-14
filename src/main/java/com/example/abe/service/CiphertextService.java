@@ -32,7 +32,6 @@ public class CiphertextService {
     }
 
     public void createCiphertext(String policy) {
-
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
         Message message = DCPABE.generateRandomMessage(gp); // message is generated
         List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
@@ -66,4 +65,5 @@ public class CiphertextService {
         ciphertextRepository.save(ciphertext);
         return ciphertext.getId();
     }
+
 }

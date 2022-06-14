@@ -24,14 +24,12 @@ public class ClientController {
     }
 
     @PostMapping
-    public void registerNewClient(
-            @RequestBody Client client) {
+    public void registerNewClient(@RequestBody Client client) {
         clientService.addNewClient(client);
     }
 
     @DeleteMapping(path = "{clientId}")
-    public void deleteClient(
-            @PathVariable("clientId") Long clientId) {
+    public void deleteClient(@PathVariable("clientId") Long clientId) {
         clientService.deleteClient(clientId);
     }
 
@@ -41,4 +39,5 @@ public class ClientController {
                              @RequestParam(required = false) String email) {
         clientService.updateClient(clientId, name, email);
     }
+
 }

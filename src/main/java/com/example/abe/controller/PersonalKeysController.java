@@ -1,6 +1,6 @@
 package com.example.abe.controller;
 
-import com.example.abe.DTO.PersonalKeysRequestDTO;
+import com.example.abe.DTO.PersonalKeysDTO;
 import com.example.abe.dcpabe.other.PersonalKeys;
 import com.example.abe.service.PersonalKeysService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class PersonalKeysController {
     }
 
     @PutMapping(path = "/request")
-    public PersonalKeys addPersonalKey(@RequestBody PersonalKeysRequestDTO body) {
+    public PersonalKeys addPersonalKey(@RequestBody PersonalKeysDTO body) {
         return personalKeysService.addPersonalKey(body);
     }
 

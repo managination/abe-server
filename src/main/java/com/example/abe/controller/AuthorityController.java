@@ -25,15 +25,13 @@ public class AuthorityController {
     }
 
     @PostMapping
-    public void createAuthority(
-            @RequestBody AuthorityDTO authority) {
+    public void createAuthority(@RequestBody AuthorityDTO authority) {
         authorityService.createAuthority(authority);
     }
 
     @DeleteMapping(path = "{authorityId}")
-    public void deleteAuthority(
-            @PathVariable("authorityId") Long authorityId,
-            @RequestParam(required = false) String attribute) {
+    public void deleteAuthority(@PathVariable("authorityId") Long authorityId,
+                                @RequestParam(required = false) String attribute) {
         authorityService.deleteAuthority(authorityId, attribute);
     }
 
@@ -46,7 +44,7 @@ public class AuthorityController {
 
     @GetMapping(path = "{authorityName}")
     public AuthorityKeys AuthorityKeysByName(@PathVariable("authorityName") String authorityName) {
-        return authorityService.AuthorityKeysByName(authorityName);
+        return authorityService.getAuthorityKeysByName(authorityName);
     }
 
 }

@@ -31,16 +31,17 @@ public class AuthorityService {
     }
 
     public void createAuthority(AuthorityDTO body) {
+        String authorityName = body.getName();
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
-                .findAuthorityByName(body.getName());
+                .findAuthorityByName(authorityName);
         if (optionalAuthority.isPresent()) {
-            throw new IllegalStateException("authority already exists");
+            throw new IllegalStateException("authority with name " + authorityName + " already exists");
         }
-        AuthorityKeys authority = DCPABE.authoritySetup(body.getName(), gp);
+        AuthorityKeys authority = DCPABE.authoritySetup(authorityName, gp);
         authorityRepository.save(authority);
-        Long authorityId = authorityRepository.findAuthorityByName(body.getName())
+        Long authorityId = authorityRepository.findAuthorityByName(authorityName)
                 .orElseThrow(() -> new IllegalStateException("authority was not saved")).getId();
-        updateAuthority(authorityId, body.getName(), body.getAttributes());
+        updateAuthority(authorityId, authorityName, body.getAttributes());
 
     }
 
@@ -85,18 +86,18 @@ public class AuthorityService {
         String[] attributesWithId = Arrays.stream(attributes)
                 .map(attribute -> authorityId + "_" + attribute)
                 .toArray(String[]::new);
-        boolean attributeRepeated = Arrays.stream(attributesWithId)
+        boolean attributeIsRepeated = Arrays.stream(attributesWithId)
                 .map(attribute -> authority.getPublicKeys().containsKey(attribute)
                 ).collect(Collectors.toList()).contains(true);
-        if (attributeRepeated) {
-            throw new IllegalStateException("one of attribute already exists");
+        if (attributeIsRepeated) {
+            throw new IllegalStateException("at least one of attribute already exists");
         }
         DCPABE.authorityUpdate(authority, gp, attributesWithId);
         authorityRepository.save(authority);
         publicKeysService.addPublicKeys(authority); //add authority PKs to all PKs
     }
 
-    public AuthorityKeys AuthorityKeysByName(String authorityName) {
+    public AuthorityKeys getAuthorityKeysByName(String authorityName) {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(authorityName);
         if (optionalAuthority.isEmpty()) {

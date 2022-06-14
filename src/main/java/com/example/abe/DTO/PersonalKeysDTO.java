@@ -1,14 +1,14 @@
 package com.example.abe.DTO;
 
-public class PersonalKeysRequestDTO {
+public class PersonalKeysDTO {
 
     private Long clientId;
     private Long authorityId;
     private String attribute;
 
-    public PersonalKeysRequestDTO(Long clientId,
-                                  Long authorityId,
-                                  String attribute) {
+    public PersonalKeysDTO(Long clientId,
+                           Long authorityId,
+                           String attribute) {
         this.clientId = clientId;
         this.authorityId = authorityId;
         this.attribute = attribute;
