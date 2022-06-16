@@ -5,10 +5,14 @@ import com.example.abe.dcpabe.access.AccessStructure.MatrixElement;
 import com.example.abe.dcpabe.key.PersonalKey;
 import com.example.abe.dcpabe.key.PublicKey;
 import com.example.abe.dcpabe.key.SecretKey;
-import it.unisa.dia.gas.jpbc.Element;
-import it.unisa.dia.gas.jpbc.Pairing;
-import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
-import it.unisa.dia.gas.plaf.jpbc.pairing.a1.TypeA1CurveGenerator;
+//import it.unisa.dia.gas.jpbc.Element;
+//import it.unisa.dia.gas.jpbc.Pairing;
+//import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+//import it.unisa.dia.gas.plaf.jpbc.pairing.a1.TypeA1CurveGenerator;
+import com.example.abe.jpbc.Element;
+import com.example.abe.jpbc.Pairing;
+import com.example.abe.jpbc.pairing.PairingFactory;
+import com.example.abe.jpbc.pairing.a1.TypeA1CurveGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
