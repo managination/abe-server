@@ -42,11 +42,12 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.github.stefano81</groupId>
-			<artifactId>jpbc</artifactId>
-			<version>v2.0.0-m</version>
-		</dependency>
+<!-- Not needed after adding jpbc folder to project	-->
+<!--		<dependency>-->
+<!--			<groupId>com.github.stefano81</groupId>-->
+<!--			<artifactId>jpbc</artifactId>-->
+<!--			<version>v2.0.0-m</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.vladmihalcea</groupId>
@@ -79,6 +80,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>de.mirkosertic.bytecoder</groupId>
+			<artifactId>bytecoder-mavenplugin</artifactId>
+			<version>2021-11-02</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -94,6 +101,24 @@
 					<source>11</source>
 					<target>11</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>de.mirkosertic.bytecoder</groupId>
+				<artifactId>bytecoder-mavenplugin</artifactId>
+				<version>2021-11-02</version>
+				<configuration>
+					<mainClass>com.example.abe.HelloWorld</mainClass>
+					<backend>wasm</backend>
+					<enableExceptionHandling>false</enableExceptionHandling>
+					<optimizationLevel>ALL</optimizationLevel>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
