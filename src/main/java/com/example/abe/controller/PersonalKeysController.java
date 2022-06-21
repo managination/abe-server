@@ -30,7 +30,7 @@ public class PersonalKeysController {
     }
 
     @GetMapping(path = "{personalKeysId}")
-    public PersonalKeys getPersonalKeysById(@PathVariable Long personalKeysId) {
+    public PersonalKeys getPersonalKeysById(@PathVariable("personalKeysId") Long personalKeysId) {
         return personalKeysService.getPersonalKeysById(personalKeysId);
     }
 

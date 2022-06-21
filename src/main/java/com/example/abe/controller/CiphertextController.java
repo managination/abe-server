@@ -34,4 +34,8 @@ public class CiphertextController {
         cipherTextService.deleteCiphertext(ciphertextId);
     }
 
+    @GetMapping(path = "{ciphertextId}")
+    public Ciphertext getCiphertextById(@PathVariable("ciphertextId") Long ciphertextId) {
+        return cipherTextService.getCiphertextById(ciphertextId);
+    }
 }

@@ -32,6 +32,7 @@ public class CiphertextService {
     }
 
     public void createCiphertext(String policy) {
+
         AccessStructure as = AccessStructure.buildFromPolicy(policy);
         Message message = DCPABE.generateRandomMessage(gp); // message is generated
         List<PublicKeys> publicKeysList = publicKeysService.getPublicKeys();
@@ -66,4 +67,9 @@ public class CiphertextService {
         return ciphertext.getId();
     }
 
+    public Ciphertext getCiphertextById(Long ciphertextId) {
+        return ciphertextRepository.findById(ciphertextId)
+                .orElseThrow(() -> new IllegalStateException(
+                        ("ciphertext with id " + ciphertextId + " does not exist")));
+    }
 }
