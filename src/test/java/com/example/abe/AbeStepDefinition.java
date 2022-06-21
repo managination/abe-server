@@ -1,7 +1,7 @@
 package com.example.abe;
 
 import com.example.abe.DTO.AuthorityDTO;
-import com.example.abe.DTO.PersonalKeysRequestDTO;
+import com.example.abe.DTO.PersonalKeysDTO;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.model.Channel;
 import com.example.abe.model.Client;
@@ -58,7 +58,7 @@ public class AbeStepDefinition {
         Long authorityKeysId = getAuthorityKeysId();
         String attribute = authorityKeysId + "_" + attributeName;
 
-        PersonalKeysRequestDTO personalKeysRequestDTO = new PersonalKeysRequestDTO(clientId, authorityKeysId, attribute);
+        PersonalKeysDTO personalKeysRequestDTO = new PersonalKeysDTO(clientId, authorityKeysId, attribute);
         restTemplate.put(
                 "http://localhost:8080/api/v1/personalKeys/request",
                 personalKeysRequestDTO
