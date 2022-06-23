@@ -8,7 +8,7 @@ import com.example.abe.jpbc.field.poly.PolyField;
 import com.example.abe.jpbc.field.poly.PolyModElement;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 import java.util.List;
 
 /**

@@ -10,7 +10,7 @@ import com.example.abe.jpbc.pairing.AbstractPairing;
 import com.example.abe.jpbc.pairing.e.TypeETateProjectiveMillerPairingMap;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

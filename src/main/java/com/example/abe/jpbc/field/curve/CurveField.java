@@ -7,7 +7,7 @@ import com.example.abe.jpbc.field.base.AbstractFieldOver;
 import com.example.abe.jpbc.field.curve.CurveElement;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

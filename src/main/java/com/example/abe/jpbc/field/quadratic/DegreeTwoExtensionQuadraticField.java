@@ -4,7 +4,7 @@ import com.example.abe.jpbc.Field;
 import com.example.abe.jpbc.field.quadratic.DegreeTwoExtensionQuadraticElement;
 import com.example.abe.jpbc.field.quadratic.QuadraticField;
 
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

@@ -1,7 +1,7 @@
 package com.example.abe.jpbc.util.math;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;

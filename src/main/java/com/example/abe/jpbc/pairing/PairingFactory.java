@@ -12,7 +12,7 @@ import com.example.abe.jpbc.pairing.immutable.ImmutableParing;
 import com.example.abe.jpbc.pairing.parameters.PropertiesParameters;
 
 import java.lang.reflect.Method;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 

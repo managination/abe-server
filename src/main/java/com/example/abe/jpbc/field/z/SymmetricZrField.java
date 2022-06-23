@@ -5,7 +5,7 @@ import com.example.abe.jpbc.field.z.SymmetricZrElement;
 import com.example.abe.jpbc.util.math.BigIntegerUtils;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

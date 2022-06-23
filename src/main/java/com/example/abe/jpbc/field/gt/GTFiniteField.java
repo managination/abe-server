@@ -6,7 +6,7 @@ import com.example.abe.jpbc.field.gt.GTFiniteElement;
 import com.example.abe.jpbc.pairing.map.PairingMap;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

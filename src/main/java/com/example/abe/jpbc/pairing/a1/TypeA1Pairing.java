@@ -12,7 +12,7 @@ import com.example.abe.jpbc.pairing.a1.TypeA1TateAffineMillerPairingMap;
 import com.example.abe.jpbc.pairing.a1.TypeA1TateNafProjectiveMillerPairingMap;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

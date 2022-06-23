@@ -5,7 +5,7 @@ import com.example.abe.jpbc.Field;
 import com.example.abe.jpbc.FieldOver;
 import com.example.abe.jpbc.field.base.AbstractField;
 
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

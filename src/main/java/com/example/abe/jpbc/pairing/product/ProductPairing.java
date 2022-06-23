@@ -7,7 +7,7 @@ import com.example.abe.jpbc.pairing.accumulator.PairingAccumulatorFactory;
 import com.example.abe.jpbc.pairing.accumulator.ProductPairingAccumulator;
 import com.example.abe.jpbc.pairing.map.DefaultPairingPreProcessing;
 
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

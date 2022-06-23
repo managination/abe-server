@@ -4,7 +4,7 @@ import com.example.abe.jpbc.field.base.AbstractField;
 import com.example.abe.jpbc.field.z.ZElement;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

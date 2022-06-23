@@ -3,7 +3,7 @@ package com.example.abe.jpbc.pairing;
 import com.example.abe.jpbc.*;
 import com.example.abe.jpbc.pairing.map.PairingMap;
 
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 
 /**
  * @author Angelo De Caro (jpbclib@gmail.com)

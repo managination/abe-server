@@ -17,7 +17,7 @@ import com.example.abe.jpbc.pairing.f.TypeFTateNoDenomMillerPairingMap;
 import com.example.abe.jpbc.util.math.BigIntegerUtils;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
+import com.example.abe.security.SecureRandom;
 import java.util.List;
 
 /**
