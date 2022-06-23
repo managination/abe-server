@@ -27,36 +27,36 @@ import java.util.Objects;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@TypeDefs({
-        @TypeDef(name = "json", typeClass = JsonType.class)
-})
-@Entity(name = "GlobalParameters")
-@Table(name = "global_parameters")
-@JsonSerialize(using = GlobalParameters.Serializer.class)
-@JsonDeserialize(using = GlobalParameters.Deserializer.class)
+//@TypeDefs({
+//        @TypeDef(name = "json", typeClass = JsonType.class)
+//})
+//@Entity(name = "GlobalParameters")
+//@Table(name = "global_parameters")
+//@JsonSerialize(using = GlobalParameters.Serializer.class)
+//@JsonDeserialize(using = GlobalParameters.Deserializer.class)
 public class GlobalParameters implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static GlobalParameters gp = DCPABE.globalSetup(160);
 
-    @Id
-    @SequenceGenerator(
-            name = "global_parameters_sequence",
-            sequenceName = "global_parameters_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "global_parameters_sequence"
-    )
+//    @Id
+//    @SequenceGenerator(
+//            name = "global_parameters_sequence",
+//            sequenceName = "global_parameters_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = SEQUENCE,
+//            generator = "global_parameters_sequence"
+//    )
     private Long id;
 
-    @Type(type = "json")
-    @Column(columnDefinition = "jsonb")
+//    @Type(type = "json")
+//    @Column(columnDefinition = "jsonb")
     private PairingParameters pairingParameters;
 
-    @Type(type = "json")
-    @Column(columnDefinition = "jsonb")
+//    @Type(type = "json")
+//    @Column(columnDefinition = "jsonb")
     private Element g1;
 
     public Long getId() {
