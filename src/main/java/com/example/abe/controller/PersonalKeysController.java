@@ -6,6 +6,7 @@ import com.example.abe.service.PersonalKeysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class PersonalKeysController {
     }
 
     @PutMapping(path = "/request")
-    public PersonalKeys addPersonalKey(@RequestBody PersonalKeysRequestDTO body) {
+    public PersonalKeys addPersonalKey(@RequestBody PersonalKeysRequestDTO body) throws IOException, ClassNotFoundException {
         return personalKeysService.addPersonalKey(body);
     }
 

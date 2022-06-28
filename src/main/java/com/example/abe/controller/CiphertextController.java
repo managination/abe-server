@@ -5,6 +5,7 @@ import com.example.abe.dcpabe.other.Ciphertext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class CiphertextController {
 
     @PostMapping
     public Long createCiphertext(@RequestParam String policy,
-                                 @RequestBody String text) {
+                                 @RequestBody String text) throws IOException, ClassNotFoundException {
         return cipherTextService.createCiphertextByString(policy, text);
     }
 

@@ -12,22 +12,22 @@ import com.example.abe.dcpabe.key.SecretKey;
 import com.example.abe.jpbc.Element;
 import com.example.abe.jpbc.Pairing;
 import com.example.abe.jpbc.pairing.PairingFactory;
-import com.example.abe.jpbc.pairing.a1.TypeA1CurveGenerator;
+//import com.example.abe.jpbc.pairing.a1.TypeA1CurveGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DCPABE {
-    public static GlobalParameters globalSetup(int lambda) {
-        GlobalParameters params = new GlobalParameters();
-
-        params.setPairingParameters(new TypeA1CurveGenerator(3, lambda).generate());
-        Pairing pairing = PairingFactory.getPairing(params.getPairingParameters());
-
-        params.setG1(pairing.getG1().newRandomElement().getImmutable());
-
-        return params;
-    }
+//    public static GlobalParameters globalSetup(int lambda) {
+//        GlobalParameters params = new GlobalParameters();
+//
+//        params.setPairingParameters(new TypeA1CurveGenerator(3, lambda).generate());
+//        Pairing pairing = PairingFactory.getPairing(params.getPairingParameters());
+//
+//        params.setG1(pairing.getG1().newRandomElement().getImmutable());
+//
+//        return params;
+//    }
 
     public static AuthorityKeys authoritySetup(String authorityID, GlobalParameters GP, String... attributes) {
         AuthorityKeys authorityKeys = new AuthorityKeys(authorityID);

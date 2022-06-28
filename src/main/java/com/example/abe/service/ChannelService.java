@@ -2,6 +2,7 @@ package com.example.abe.service;
 
 import com.example.abe.dcpabe.other.Ciphertext;
 import com.example.abe.dcpabe.other.DCPABE;
+import com.example.abe.dcpabe.other.GlobalParameters;
 import com.example.abe.dcpabe.other.PersonalKeys;
 import com.example.abe.model.Channel;
 import com.example.abe.repository.ChannelRepository;
@@ -11,11 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.abe.dcpabe.other.GlobalParameters.gp;
+//import static com.example.abe.dcpabe.other.GlobalParameters.gp;
 
 @Service
 public class ChannelService {
@@ -23,14 +25,17 @@ public class ChannelService {
     private final ChannelRepository channelRepository;
     private final CiphertextRepository ciphertextRepository;
     private final PersonalKeysRepository personalKeysRepository;
+    private final GlobalParametersService globalParametersService;
 
     @Autowired
     public ChannelService(ChannelRepository channelRepository,
                           CiphertextRepository ciphertextRepository,
-                          PersonalKeysRepository personalKeysRepository) {
+                          PersonalKeysRepository personalKeysRepository,
+                          GlobalParametersService globalParametersService) {
         this.channelRepository = channelRepository;
         this.ciphertextRepository = ciphertextRepository;
         this.personalKeysRepository = personalKeysRepository;
+        this.globalParametersService = globalParametersService;
     }
 
     public List<Channel> getAllChannels() {
@@ -76,7 +81,7 @@ public class ChannelService {
         return optionalChannel.get();
     }
 
-    public List<String> decryptChannel(String topic, Long personalKeysId) {
+    public List<String> decryptChannel(String topic, Long personalKeysId) throws IOException, ClassNotFoundException {
         Optional<Channel> optionalChannel = channelRepository
                 .findChannelByTopic(topic);
         if (optionalChannel.isEmpty()) {
@@ -87,6 +92,7 @@ public class ChannelService {
             throw new IllegalStateException("personalKeys with id " + personalKeysId + " does not exist");
         }
 
+        GlobalParameters gp = globalParametersService.getGlobalParameters();
         PersonalKeys personalKeys = personalKeysOpt.get();
         List<Long> ciphertextIdList = optionalChannel.get().getBody();
         List<Ciphertext> ciphertexts = ciphertextIdList.stream()

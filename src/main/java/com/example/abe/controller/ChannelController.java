@@ -5,6 +5,7 @@ import com.example.abe.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -46,7 +47,7 @@ public class ChannelController {
 
     @GetMapping(path = "/decrypt")
     public List<String> decryptChannel(@RequestParam String topic,
-                                       @RequestParam Long personalKeysId) {
+                                       @RequestParam Long personalKeysId) throws IOException, ClassNotFoundException {
         return channelService.decryptChannel(topic, personalKeysId);
     }
 

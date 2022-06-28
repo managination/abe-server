@@ -3,39 +3,45 @@ package com.example.abe.service;
 import com.example.abe.DTO.AuthorityDTO;
 import com.example.abe.dcpabe.other.AuthorityKeys;
 import com.example.abe.dcpabe.other.DCPABE;
+import com.example.abe.dcpabe.other.GlobalParameters;
 import com.example.abe.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.abe.dcpabe.other.GlobalParameters.gp;
+//import static com.example.abe.dcpabe.other.GlobalParameters.gp;
 
 @Service
 public class AuthorityService {
 
     private final AuthorityRepository authorityRepository;
     private final PublicKeysService publicKeysService;
+    private final GlobalParametersService globalParametersService;
 
     @Autowired
     public AuthorityService(AuthorityRepository authorityRepository,
-                            PublicKeysService publicKeysService) {
+                            PublicKeysService publicKeysService,
+                            GlobalParametersService globalParametersService) {
         this.authorityRepository = authorityRepository;
         this.publicKeysService = publicKeysService;
+        this.globalParametersService = globalParametersService;
     }
 
     public List<AuthorityKeys> getAuthorityKeys() {
         return authorityRepository.findAll();
     }
 
-    public void createAuthority(AuthorityDTO body) {
+    public void createAuthority(AuthorityDTO body) throws IOException, ClassNotFoundException {
         Optional<AuthorityKeys> optionalAuthority = authorityRepository
                 .findAuthorityByName(body.getName());
         if (optionalAuthority.isPresent()) {
             throw new IllegalStateException("authority already exists");
         }
+        GlobalParameters gp = globalParametersService.getGlobalParameters();
         AuthorityKeys authority = DCPABE.authoritySetup(body.getName(), gp);
         authorityRepository.save(authority);
         Long authorityId = authorityRepository.findAuthorityByName(body.getName())
@@ -71,7 +77,7 @@ public class AuthorityService {
     @Transactional
     public void updateAuthority(Long authorityId,
                                 String name,
-                                String[] attributes) {
+                                String[] attributes) throws IOException, ClassNotFoundException {
         AuthorityKeys authority = authorityRepository.findById(authorityId)
                 .orElseThrow(() -> new IllegalStateException(
                         ("authority with id " + authorityId + " does not exist")));
@@ -91,6 +97,7 @@ public class AuthorityService {
         if (attributeRepeated) {
             throw new IllegalStateException("one of attribute already exists");
         }
+        GlobalParameters gp = globalParametersService.getGlobalParameters();
         DCPABE.authorityUpdate(authority, gp, attributesWithId);
         authorityRepository.save(authority);
         publicKeysService.addPublicKeys(authority); //add authority PKs to all PKs

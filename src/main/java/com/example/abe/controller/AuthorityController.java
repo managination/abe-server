@@ -6,6 +6,7 @@ import com.example.abe.dcpabe.other.AuthorityKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class AuthorityController {
 
     @PostMapping
     public void createAuthority(
-            @RequestBody AuthorityDTO authority) {
+            @RequestBody AuthorityDTO authority) throws IOException, ClassNotFoundException {
         authorityService.createAuthority(authority);
     }
 
@@ -40,7 +41,7 @@ public class AuthorityController {
     @PutMapping(path = "{authorityId}")
     public void updateAuthority(@PathVariable("authorityId") Long authorityId,
                                 @RequestParam(required = false) String name,
-                                @RequestParam(required = false) String[] attributes) {
+                                @RequestParam(required = false) String[] attributes) throws IOException, ClassNotFoundException {
         authorityService.updateAuthority(authorityId, name, attributes);
     }
 
